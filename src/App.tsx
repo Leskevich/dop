@@ -11,17 +11,21 @@ type ShowType = {
 
 function App() {
     const [show, setShow] = useState<ShowType[]>([])
-
-
     const ShowUp = () => {
         fetch('https://jsonplaceholder.typicode.com/todos')
             .then((response) => response.json())
             .then((json) => setShow(json));
     }
+    const cleanShow = () => {
+        setShow([])
+    }
     return (
         <div className="App">
             <Button name={'show me'}
                     collBack={ShowUp}
+            />
+            <Button name={'clean me'}
+                    collBack={cleanShow}
             />
             <ul>
                 {
@@ -30,7 +34,7 @@ function App() {
                             <li key={el.id}>
                                 <span>{el.id}</span>
                                 <span>{el.title}</span>
-                                <span>{el.completed}</span>
+                                <span> {`${el.completed}`}</span>
                             </li>
                         )
                     })
